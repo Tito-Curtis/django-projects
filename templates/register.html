@@ -1,0 +1,61 @@
+{%load static%}
+
+    <style>
+        h5{
+            color: red;
+        }
+    </style>
+    {% for message in messages %}
+    <h5>{{ message }}</h5>
+    {% endfor %}
+
+<body>
+    
+    <h1>please fill the  forms below</h1>
+    <form method="POST" action="register">
+        {% csrf_token%}
+       <div>
+        <label>name:</label>
+        <input type="text" name="username">
+        </div>
+        <br>
+        <div>
+        <label>email:</label>
+        <input type="email" name="email">
+        </div>
+        <br>
+        <div>
+        <label>password:</label>
+        <input type="password" name="password">
+        </div>
+        <br>
+        <div>
+        <label>confirm password:</label>
+        <input type="password" name="confirm_password">
+        </div>
+        <br>
+        
+            <input type="submit"> 
+<!--- 
+        <p>username</p>
+        <input type="text" name="username" />
+        <p>email</p>
+        <input type="email" name="email" />
+        <p>password</p>
+        <input type="password" name="password" />
+        <p>comfirm password</p>
+        <input type="password" name="confirm_password" /><br>
+        <input type="submit" />
+        -->
+
+        
+        
+
+
+
+
+    </form >
+    
+    
+</body>
+</html>
