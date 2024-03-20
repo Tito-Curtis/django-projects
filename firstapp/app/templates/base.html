@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main.css'%}">
+    <title>{%block title%} {% endblock%}</title>
+</head>
+<body>
+    <h2>Welcome to the Meeting Planner! </h2>
+    <h3>This is the Demo Application courese on <a href="https://app.pluralsight.com/library/"><b>pluralsight</b></a></h3>
+
+    {% block content%}
+
+    {%endblock%}
+    
+</body>
+</html>

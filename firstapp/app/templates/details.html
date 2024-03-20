@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+   {% block title%}details{% endblock%}
+
+    {% block content %}
+    <h2>Welcome to tito meeting planner </h2>
+    <h1>{{meeting.title}}</h1>
+    <h2>The meeting has been schedule to {{meeting.date}} at {{meeting.room}}</h2>
+    <h2> at {{meeting.time}}</h2>
+    {% endblock %}
+    
+
