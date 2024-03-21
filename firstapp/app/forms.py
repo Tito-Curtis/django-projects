@@ -35,6 +35,7 @@ class SignupForm(forms.ModelForm):
             self.add_error('email', msg)
             #raise forms.ValidationError('Email has been used')
         if password == confirm_password:
+            specialCharacters = "!@#$%^&*()-_=+[{]}:|;'<,>.?/\\|`~"
             if len(password) < 6:
                 #raise forms.ValidationError('password too short')
                 msg = 'password too short'
@@ -43,6 +44,12 @@ class SignupForm(forms.ModelForm):
             if not(any(char.isalpha() for char in password) and any(char.isdigit() for char in password)):
                 #raise forms.ValidationError('password must contain at least a digit') 
                 msg = 'password must contain both digit and numbers'
+                self.add_error('password', msg)
+            if not(any(char.isupper() for char in password)):
+                msg = 'password must contain an uppercase character'
+                self.add_error('password', msg)
+            if not(any(char in specialCharacters for char in password )):
+                msg='password must contain a special character'
                 self.add_error('password', msg)
 
         else:
