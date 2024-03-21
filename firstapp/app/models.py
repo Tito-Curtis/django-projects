@@ -8,7 +8,6 @@ class room(models.Model):
     name = models.CharField(max_length=100)
     room_number = models.IntegerField()
     floor_room = models.IntegerField()
-   
     
 
     def __str__(self):
@@ -47,9 +46,6 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"   #p
-
-
-
 
     def __str__(self):
         return self.name
