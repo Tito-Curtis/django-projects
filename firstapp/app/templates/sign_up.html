@@ -1,13 +1,44 @@
 {% extends 'base.html' %}
 {% block title%}signp{% endblock%}
    {% block content %}
-   <form action="" method="post">
-      
-       {% csrf_token %}
-       <table>
-       {{form.as_p}}
-    </table>
-       <input type="submit" value="signUp">
-        
+   <form action="" method="post">          
+         {% csrf_token %}
+         {% if form.non_field_errors %}
+        <div style="color: red">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <div>
+        {{ form.firstName.errors }}
+        {{ form.firstName.label_tag }}: {{ form.firstName }}
+    </div>
+    
+    
+    <div>
+        {{ form.lastName.errors }}
+        {{ form.lastName.label_tag }}: {{ form.lastName }}
+    </div>
+    
+    <div>
+        {{ form.email.errors }}
+        {{ form.email.label_tag }}: {{ form.email }}
+    </div>
+    
+    <div>
+        {{ form.password.errors }}
+        {{ form.password.label_tag }}: {{ form.password }}
+    </div>
+    
+    <div>
+        {{ form.confirm_password.errors }}
+        {{ form.confirm_password.label_tag }}: {{ form.confirm_password }}
+    </div>
+         
+    
+         <input type="submit" value="signUp">       
    </form>
+   
    {%endblock%}
