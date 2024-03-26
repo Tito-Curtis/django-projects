@@ -9,3 +9,6 @@ admin.site.register(Product)
 admin.site.register(ProductImage)
 admin.site.register(Category)
 admin.site.register(All_Users)
+admin.site.site_header="Admin Panel"
+admin.site.site_title = "Admin"
+admin.site.index_title="Administration"

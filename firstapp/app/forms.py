@@ -1,8 +1,8 @@
 
 from django import forms
 from .models import All_Users
-from django.utils.translation import gettext as _
 from django.contrib.auth.hashers import make_password
+
 
 
 class SignupForm(forms.ModelForm):
@@ -25,11 +25,7 @@ class SignupForm(forms.ModelForm):
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
         email = cleaned_data.get('email')
-        
-      
-        #email = self.cleaned_data['email']
-        
-        
+ 
         if All_Users.objects.filter(email=email).exists():
             #msg = 'Email has been used'
             #self.add_error('email', msg)
@@ -38,21 +34,15 @@ class SignupForm(forms.ModelForm):
             specialCharacters = "!@#$%^&*()-_=+[{]}:|;'<,>.?/\\|`~"
             if len(password) < 6:
                 raise forms.ValidationError('password too short')
-                #msg = 'password too short'
-                #self.add_error('password', msg)
-            
+                       
             if not(any(char.isalpha() for char in password) and any(char.isdigit() for char in password)):
                 raise forms.ValidationError('password must contain at least a digit') 
-                #msg = 'password must contain both digit and numbers'
-                #self.add_error('password', msg)
+            
             if not(any(char.isupper() for char in password)):
                 raise forms.ValidationError('password must contain both digit and numbers')
-                #msg = 'password must contain an uppercase character'
-                #self.add_error('password', msg)
+                
             if not(any(char in specialCharacters for char in password )):
                 raise forms.ValidationError('password must contain a special character')
-                #msg='password must contain a special character'
-                #self.add_error('password', msg)
 
         else:
             raise forms.ValidationError('Passwords do not match')
@@ -71,6 +61,16 @@ class SignupForm(forms.ModelForm):
             user.save()
         return user
     
+class LoginForm(forms.Form):
+    email = forms.EmailField(label="email", max_length=200)
+    password = forms.CharField(label="password", widget=forms.PasswordInput)
+
+    class Meta:
+        model = All_Users
+        fields = ["email", "password"]
+    
+
+
 
     
     

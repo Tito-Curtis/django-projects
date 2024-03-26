@@ -1,9 +1,11 @@
+from django import forms
 from django.shortcuts import render, get_object_or_404,redirect,HttpResponse
 from .models import meetings, room,All_Users
-from django.forms import modelform_factory
-from .forms import SignupForm
-from django.contrib.auth.hashers import make_password, get_hasher
+from django.forms import ValidationError, modelform_factory
+from .forms import SignupForm, LoginForm
+from django.contrib.auth.hashers import make_password, get_hasher,check_password
 from django.contrib import messages
+from django.contrib.auth import authenticate,login
 
 
 # Create your views here.
@@ -37,12 +39,31 @@ def signUp_view(request):
         form = SignupForm(request.POST)
         if form.is_valid(): #p
             form.save()
-            return redirect('index')
-        else:
-            for field,error in form.errors.items():
-                error
-                break
-     
+            return redirect('index')    
     else:
         form = SignupForm()
     return render(request,'sign_up.html', {'form':form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            email = email.lower()
+            print("Email:", email) 
+            print("Password:", password)
+            user = authenticate(request,email=email,password=password) 
+            print("user:", user)                     
+            if user is not None:         
+                login(request, user)
+                return redirect('index')
+            else:
+                form.add_error(None, 'invalid username or password')
+       
+            
+    else:
+        
+        form = LoginForm()
+      
+    return render(request,'login.html', {'form':form})

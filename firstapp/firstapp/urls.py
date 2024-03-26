@@ -21,8 +21,9 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index, name='index'),
-    path('new/', views.new, name='new'),
-    path('signup/', views.signUp_view, name='signup'),
-    path('app/', include('app.urls')),
+    path('', include('app.urls')),
+    path('login/',include('django.contrib.auth.urls')),
+    
+    
+    
 ]
