@@ -16,11 +16,13 @@
          {{form.email}}
     </div>
     <div>
-       {{form.password.label_tag}}
+       {{form.password.label_tag}}  
        {{form.password}}
     </div>
     
     <input type="submit" value="login">
   </form>
+  <br>
+  <p><a href="{% url 'reset_password' %}">forget password</a></p>
 </div>
   {%endblock%}

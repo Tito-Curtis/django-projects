@@ -18,12 +18,34 @@ from django.contrib import admin
 from django.urls import path
 from app import urls,views
 from django.conf.urls import include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
     path('login/',include('django.contrib.auth.urls')),
+    path('reset_password/',
+         auth_views.PasswordResetView.as_view(template_name="reset_password.html"),
+         name='reset_password'),
+
+    path('reset_password_sent/',
+         auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),
+         name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),
+         name='password_reset_confirm'),
+
+    path('reset_password_complete',
+         auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),
+         name='password_reset_complete'),
     
     
     
 ]
+# Class-based password reset views
+# - PasswordResetView sends the mail
+# - PasswordResetDoneView shows a success message for the above
+# - PasswordResetConfirmView checks the link the user clicked and
+#   prompts for a new password
+# - PasswordResetCompleteView shows a success message for the above
